@@ -51,7 +51,7 @@ public class EmailListServlet extends HttpServlet {
 
                 // send email to user
                 String to = email;
-                String from = "nguyenvinh071206@gmail.com";
+                String from = MailUtilBrevo.getFromAddress();
                 String subject = "Welcome to our email list";
                 String body = "Dear " + firstName + ",\n\n"
                         + "Thanks for joining our email list. We'll make sure to send "
@@ -62,7 +62,7 @@ public class EmailListServlet extends HttpServlet {
                 boolean isBodyHTML = false;
 
                 try {
-                    MailUtilGmail.sendMail(to, from, subject, body, isBodyHTML);
+                    MailUtilBrevo.sendMail(to, from, subject, body, isBodyHTML);
                 } catch (MessagingException e) {
                     String errorMessage = "ERROR: Unable to send email. " + e.getMessage();
                     request.setAttribute("errorMessage", errorMessage);
