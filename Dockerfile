@@ -26,8 +26,8 @@ RUN rm -rf webapps/*
 COPY --from=builder /build/target/jpa.war webapps/ROOT.war
 
 # Render cấp port động qua biến môi trường $PORT (mặc định 8080 hoặc 10000)
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=10000
+EXPOSE 10000
 
 # Cập nhật cổng trong server.xml theo $PORT của Render và khởi chạy Tomcat
-CMD ["sh", "-c", "sed -i 's/port=\"8080\"/port=\"'\"${PORT:-8080}\"'\"/g' conf/server.xml && catalina.sh run"]
+CMD ["sh", "-c", "sed -i 's/port=\"8080\"/port=\"'\"${PORT:-10000}\"'\"/g; s/<Server port=\"8005\"/<Server port=\"-1\"/g' conf/server.xml && catalina.sh run"]
